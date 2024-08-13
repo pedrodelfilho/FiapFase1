@@ -1,21 +1,25 @@
 ﻿using FiapFase1.Domain.Entities.Models;
 using FiapFase1.Domain.Exceptions;
 using FiapFase1.Domain.Interfaces.Repositories;
+using FiapFase1.Domain.Interfaces.Services;
 using FiapFase1.Manager.Services;
+using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace FiapFase1.Tests.Manager;
 public class ContatoServiceTest
 {
     private readonly Mock<IContatoRepository> _contatoRepositoryMock;
-    private readonly Mock<IDDDRepository> _dddRepositoryMock;
+    private readonly Mock<IDDDService> _dddServiceMock;
     private readonly ContatoService _contatoService;
+    private readonly Mock<ILogger<ContatoServiceTest>> _loggerMock;
 
     public ContatoServiceTest()
     {
         _contatoRepositoryMock = new Mock<IContatoRepository>();
-        _dddRepositoryMock = new Mock<IDDDRepository>();
-        _contatoService = new ContatoService(_contatoRepositoryMock.Object, _dddRepositoryMock.Object);
+        _dddServiceMock = new Mock<IDDDService>();
+        _contatoService = new ContatoService(_contatoRepositoryMock.Object, _dddServiceMock.Object);
+        _loggerMock = new Mock<ILogger<ContatoServiceTest>>();
     }
 
     [Fact]
@@ -25,7 +29,7 @@ public class ContatoServiceTest
         // Arrange
         var contato = new Contato { Nome = "Teste", NrTelefone = "1234567890", Email = "teste@example.com" };
         byte nrDDD = 11;
-        _dddRepositoryMock.Setup(r => r.Get()).ReturnsAsync(new List<DDD>());
+        _dddServiceMock.Setup(r => r.Get()).ReturnsAsync(new List<DDD>());
 
         // Act & Assert
         await Assert.ThrowsAsync<DomainException>(() => _contatoService.Create(contato, nrDDD));
@@ -39,7 +43,7 @@ public class ContatoServiceTest
         var contato = new Contato { Nome = "Teste", NrTelefone = "1234567890", Email = "teste@example.com" };
         byte nrDDD = 11;
         var ddd = new DDD { Id = 1, NrDDD = nrDDD };
-        _dddRepositoryMock.Setup(r => r.Get()).ReturnsAsync(new List<DDD> { ddd });
+        _dddServiceMock.Setup(r => r.Get()).ReturnsAsync(new List<DDD> { ddd });
         _contatoRepositoryMock.Setup(r => r.Create(It.IsAny<Contato>())).ReturnsAsync(contato);
 
         // Act
@@ -60,7 +64,7 @@ public class ContatoServiceTest
         contato.SetDDDId(1);
         var ddd = DDD.SetDDD(1, 11);
         _contatoRepositoryMock.Setup(r => r.Get(contatoId)).ReturnsAsync(contato);
-        _dddRepositoryMock.Setup(r => r.Get(1)).ReturnsAsync(ddd);
+        _dddServiceMock.Setup(r => r.Get(1)).ReturnsAsync(ddd);
 
         // Act
         var result = await _contatoService.Get(contatoId);
@@ -89,7 +93,7 @@ public class ContatoServiceTest
             new DDD { Id = 2, NrDDD = 22 }
         };
         _contatoRepositoryMock.Setup(r => r.Get()).ReturnsAsync(contatos);
-        _dddRepositoryMock.Setup(r => r.Get()).ReturnsAsync(ddds);
+        _dddServiceMock.Setup(r => r.Get()).ReturnsAsync(ddds);
 
         // Act
         var result = await _contatoService.Get();
@@ -120,7 +124,7 @@ public class ContatoServiceTest
         // Arrange
         var contato = new Contato { Id = 1, Nome = "Teste", NrTelefone = "1234567890", Email = "teste@example.com" };
         byte nrDDD = 11;
-        _dddRepositoryMock.Setup(r => r.Get()).ReturnsAsync(new List<DDD>());
+        _dddServiceMock.Setup(r => r.Get()).ReturnsAsync(new List<DDD>());
 
         // Act & Assert
         await Assert.ThrowsAsync<DomainException>(() => _contatoService.Update(contato, nrDDD));
@@ -134,7 +138,7 @@ public class ContatoServiceTest
         var contato = new Contato { Id = 1, Nome = "Teste", NrTelefone = "1234567890", Email = "teste@example.com" };
         byte nrDDD = 11;
         var ddd = new DDD { Id = 1, NrDDD = nrDDD };
-        _dddRepositoryMock.Setup(r => r.Get()).ReturnsAsync(new List<DDD> { ddd });
+        _dddServiceMock.Setup(r => r.Get()).ReturnsAsync(new List<DDD> { ddd });
         _contatoRepositoryMock.Setup(r => r.Update(It.IsAny<Contato>())).ReturnsAsync(contato);
 
         // Act

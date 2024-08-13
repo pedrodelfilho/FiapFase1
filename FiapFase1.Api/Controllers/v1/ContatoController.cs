@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FiapFase1.Api.Controllers.Shared;
+using FiapFase1.Api.Resources;
 using FiapFase1.Domain.Entities.Models;
 using FiapFase1.Domain.Entities.Requests;
 using FiapFase1.Domain.Entities.Responses;
@@ -9,15 +10,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FiapFase1.Api.Controllers.v1
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ContatoController : ApiControllerBase
     {
         private readonly IContatoService _contatoService;
         private readonly IMapper _mapper;
+        private readonly ILogger<ContatoController> _logger;
 
-        public ContatoController(IContatoService contatoService, IMapper mapper)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="contatoService"></param>
+        /// <param name="mapper"></param>
+        /// <param name="logger"></param>
+
+        public ContatoController(IContatoService contatoService, IMapper mapper, ILogger<ContatoController> logger)
         {
             _contatoService = contatoService;
             _mapper = mapper;
+            _logger = logger;
         }
 
         /// <summary>
@@ -33,24 +46,27 @@ namespace FiapFase1.Api.Controllers.v1
         {
             try
             {
+                _logger.LogInformation(ApiConstants.CADASTRO_CONTATO);
                 var contato = _mapper.Map<Contato>(contatoRequest);
 
                 var contatoCreated = await _contatoService.Create(contato, contatoRequest.NrDDD);
 
                 return Ok(new BaseResponse
                 {
-                    Message = "Contato cadastrado com sucesso!",
+                    Message = ApiConstants.CONTATO_CADASTRADO,
                     Success = true,
-                    Errors = null,
+                    Errors = [],
                     Data = contatoCreated
                 });
             }
             catch (DomainException ex)
             {
+                _logger.LogError(ApiConstants.ERRO_CADASTRO_CONTATO, ex.Message);
                 return BadRequest(ResponseException.DomainErrorMessage(ex.Message, ex.Errors));
             }
             catch (Exception ex)
             {
+                _logger.LogError(ApiConstants.ERRO_CADASTRO_CONTATO, ex.Message);
                 return StatusCode(500, ResponseException.ApplicationErrorMessage());
             }
 
@@ -70,22 +86,25 @@ namespace FiapFase1.Api.Controllers.v1
         {
             try
             {
+                _logger.LogInformation(ApiConstants.REMOVER_CONTATO);
                 await _contatoService.Remove(id);
 
                 return Ok(new BaseResponse
                 {
-                    Message = "Contato removido com sucesso!",
+                    Message = ApiConstants.CONTATO_REMOVIDO,
                     Success = true,
-                    Errors = null,
+                    Errors = [],
                     Data = id
                 });
             }
             catch (DomainException ex)
             {
+                _logger.LogError(ApiConstants.ERRO_REMOVER_CONTATO, ex.Message);
                 return BadRequest(ResponseException.DomainErrorMessage(ex.Message, ex.Errors));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ApiConstants.ERRO_REMOVER_CONTATO, ex.Message);
                 return StatusCode(500, ResponseException.ApplicationErrorMessage());
             }
         }
@@ -103,23 +122,26 @@ namespace FiapFase1.Api.Controllers.v1
         {
             try
             {
+                _logger.LogInformation(ApiConstants.ATUALIZAR_CONTATO);
                 var contato = _mapper.Map<Contato>(contatoRequest);
                 var contatoUpdate = await _contatoService.Update(contato, contatoRequest.NrDDD);
 
                 return Ok(new BaseResponse
                 {
-                    Message = "Contato atualizado com sucesso!",
+                    Message = ApiConstants.CONTATO_ATUALIZADO,
                     Success = true,
-                    Errors = null,
+                    Errors = [],
                     Data = contatoUpdate
                 });
             }
             catch (DomainException ex)
             {
+                _logger.LogError(ApiConstants.ERRO_ATUALIZAR_CONTATO, ex.Message);
                 return BadRequest(ResponseException.DomainErrorMessage(ex.Message, ex.Errors));
             }
             catch (Exception ex)
             {
+                _logger.LogError(ApiConstants.ERRO_ATUALIZAR_CONTATO, ex.Message);
                 return StatusCode(500, ResponseException.ApplicationErrorMessage());
             }
         }
@@ -136,22 +158,25 @@ namespace FiapFase1.Api.Controllers.v1
         {
             try
             {
+                _logger.LogInformation(ApiConstants.CONSULTAR_CONTATO);
                 var allContatos = await _contatoService.Get();
 
                 return Ok(new BaseResponse
                 {
-                    Message = "Busca por contatos realizado com sucesso!",
+                    Message = ApiConstants.CONTATO_CONSULTADO,
                     Success = true,
-                    Errors = null,
+                    Errors = [],
                     Data = allContatos
                 });
             }
             catch (DomainException ex)
             {
+                _logger.LogError(ApiConstants.ERRO_CONSULTAR_CONTATO, ex.Message);
                 return BadRequest(ResponseException.DomainErrorMessage(ex.Message, ex.Errors));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ApiConstants.ERRO_CONSULTAR_CONTATO, ex.Message);
                 return StatusCode(500, ResponseException.ApplicationErrorMessage());
             }
         }
@@ -169,22 +194,25 @@ namespace FiapFase1.Api.Controllers.v1
         {
             try
             {
+                _logger.LogInformation(ApiConstants.CONSULTAR_CONTATO);
                 var contato = await _contatoService.Get(id);
 
                 return Ok(new BaseResponse
                 {
-                    Message = $"Pesquisa realizada com sucesso!",
+                    Message = ApiConstants.CONTATO_CONSULTADO,
                     Success = true,
-                    Errors = null,
+                    Errors = [],
                     Data = contato
                 });
             }
             catch (DomainException ex)
             {
+                _logger.LogError(ApiConstants.ERRO_CONSULTAR_CONTATO, ex.Message);
                 return BadRequest(ResponseException.DomainErrorMessage(ex.Message, ex.Errors));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ApiConstants.ERRO_CONSULTAR_CONTATO, ex.Message);
                 return StatusCode(500, ResponseException.ApplicationErrorMessage());
             }
         }

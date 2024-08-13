@@ -31,6 +31,19 @@
             <param name="detail"></param>
             <param name="errors"></param>
         </member>
+        <member name="T:FiapFase1.Api.Controllers.v1.ContatoController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FiapFase1.Api.Controllers.v1.ContatoController.#ctor(FiapFase1.Domain.Interfaces.Services.IContatoService,AutoMapper.IMapper,Microsoft.Extensions.Logging.ILogger{FiapFase1.Api.Controllers.v1.ContatoController})">
+            <summary>
+            
+            </summary>
+            <param name="contatoService"></param>
+            <param name="mapper"></param>
+            <param name="logger"></param>
+        </member>
         <member name="M:FiapFase1.Api.Controllers.v1.ContatoController.CadastrarContato(FiapFase1.Domain.Entities.Requests.RegistrarContatoRequest)">
             <summary>
             Controle responsável por cadastrar novo contato
@@ -121,6 +134,71 @@
             </summary>
             <param name="app"></param>
             <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:FiapFase1.Api.Resources.ApiConstants">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FiapFase1.Api.Resources.ApiConstants.CADASTRO_CONTATO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FiapFase1.Api.Resources.ApiConstants.REMOVER_CONTATO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FiapFase1.Api.Resources.ApiConstants.ATUALIZAR_CONTATO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FiapFase1.Api.Resources.ApiConstants.CONSULTAR_CONTATO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FiapFase1.Api.Resources.ApiConstants.ERRO_CADASTRO_CONTATO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FiapFase1.Api.Resources.ApiConstants.ERRO_REMOVER_CONTATO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FiapFase1.Api.Resources.ApiConstants.ERRO_ATUALIZAR_CONTATO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FiapFase1.Api.Resources.ApiConstants.ERRO_CONSULTAR_CONTATO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FiapFase1.Api.Resources.ApiConstants.CONTATO_CONSULTADO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FiapFase1.Api.Resources.ApiConstants.CONTATO_REMOVIDO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FiapFase1.Api.Resources.ApiConstants.CONTATO_ATUALIZADO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:FiapFase1.Api.Resources.ApiConstants.CONTATO_CADASTRADO">
+            <summary>
+            
+            </summary>
         </member>
     </members>
 </doc>
