@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FiapFase1.Api</name>
+    </assembly>
+    <members>
+        <member name="T:FiapFase1.Api.Controllers.Shared.ApiControllerBase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiapFase1.Api.Controllers.Shared.CustomProblemDetails.Errors">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FiapFase1.Api.Controllers.Shared.CustomProblemDetails.#ctor(System.Net.HttpStatusCode,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            
+            </summary>
+            <param name="status"></param>
+            <param name="detail"></param>
+            <param name="errors"></param>
+        </member>
+        <member name="M:FiapFase1.Api.Controllers.Shared.CustomProblemDetails.#ctor(System.Net.HttpStatusCode,Microsoft.AspNetCore.Http.HttpRequest,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            
+            </summary>
+            <param name="status"></param>
+            <param name="request"></param>
+            <param name="detail"></param>
+            <param name="errors"></param>
+        </member>
+        <member name="M:FiapFase1.Api.Controllers.v1.ContatoController.CadastrarContato(FiapFase1.Domain.Entities.Requests.RegistrarContatoRequest)">
+            <summary>
+            Controle responsável por cadastrar novo contato
+            </summary>
+            <param name="contatoRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiapFase1.Api.Controllers.v1.ContatoController.RemoverContato(System.Int64)">
+            <summary>
+            Comando responsável por remover contato
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiapFase1.Api.Controllers.v1.ContatoController.AtualizarContato(FiapFase1.Domain.Entities.Requests.AtualizarContatoRequest)">
+            <summary>
+            Comando responsável em atualizar contato
+            </summary>
+            <param name="contatoRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiapFase1.Api.Controllers.v1.ContatoController.ObterTodosContatos">
+            <summary>
+            Comando responsável em obter todos contatos
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiapFase1.Api.Controllers.v1.ContatoController.ObterContatoPorId(System.Int64)">
+            <summary>
+            Comando responsável por obter contato pelo id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiapFase1.Api.Controllers.v1.DDDController.ObterTodosDDDs">
+            <summary>
+            Comando responsável em obter todos DDDs 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FiapFase1.Api.Extensions.ApiVersionSetupExtension.AddVersioning(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiapFase1.Api.Extensions.AuthSetupExtension.AddAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiapFase1.Api.Extensions.LoggerSetupExtension.ResolveLog(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiapFase1.Api.Extensions.ProblemSetupExtension.AddApiProblemDetails(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiapFase1.Api.Extensions.ProblemSetupExtension.MapExceptionToStatusCodeWithMessage``1(Hellang.Middleware.ProblemDetails.ProblemDetailsOptions,System.Int32)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TException"></typeparam>
+            <param name="options"></param>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:FiapFase1.Api.Extensions.SwaggerSetupExtension.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FiapFase1.Api.Extensions.SwaggerSetupExtension.UseSwaggerUI(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+    </members>
+</doc>
