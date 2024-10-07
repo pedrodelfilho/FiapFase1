@@ -9,7 +9,6 @@ pool:
     - msbuild
     - visualstudio
     - vstest
-    - Agent.Version -gt 2.163.1
 
 variables:
   buildConfiguration: 'Release'
@@ -18,7 +17,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '8.x'
+    version: '7.x' # ou a versão apropriada do .NET que seu projeto utiliza
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
 - task: NuGetToolInstaller@1
