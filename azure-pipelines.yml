@@ -5,6 +5,11 @@ trigger:
 
 pool:
   vmImage: 'windows-latest'
+  demands:
+    - msbuild
+    - visualstudio
+    - vstest
+    - Agent.Version -gt 2.163.1
 
 variables:
   buildConfiguration: 'Release'
@@ -13,7 +18,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '7.x' # ou a versão apropriada do .NET que seu projeto utiliza
+    version: '8.x'
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
 - task: NuGetToolInstaller@1
