@@ -4,12 +4,7 @@ trigger:
       - main
 
 pool:
-  name: 'Default' # Ou o nome do pool que você criou
-  vmImage: 'windows-latest'
-  demands:
-    - msbuild
-    - visualstudio
-    - vstest
+  vmImage: 'windows-latest'  # Use um agente hospedado da Microsoft
 
 variables:
   buildConfiguration: 'Release'
@@ -18,7 +13,7 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
-    version: '7.x' # ou a versão apropriada do .NET que seu projeto utiliza
+    version: '8.x' # ou a versão apropriada do .NET que seu projeto utiliza
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
 - task: NuGetToolInstaller@1
