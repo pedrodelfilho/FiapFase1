@@ -12,6 +12,7 @@ stages:
       - job: 'Build'
         displayName: 'Build job'
         pool:
+          name: 'local'
           vmImage: 'windows-latest'  # Usando um agente do Azure
 
         variables:
@@ -68,9 +69,10 @@ stages:
     jobs:
       - deployment: Deploy
         displayName: 'Deploy to Development'
-        environment: 'development'  # Nome do ambiente
+        environment: 'development'
         pool:
-          vmImage: 'windows-latest'  # Usando um agente do Azure
+          name: 'local'
+          vmImage: 'windows-latest'
         strategy:
           runOnce:
             deploy:
@@ -88,9 +90,10 @@ stages:
     jobs:
       - deployment: Deploy
         displayName: 'Deploy to Staging'
-        environment: 'staging'  # Nome do ambiente
+        environment: 'staging'
         pool:
-          vmImage: 'windows-latest'  # Usando um agente do Azure
+          name: 'local'
+          vmImage: 'windows-latest'
         strategy:
           runOnce:
             deploy:
