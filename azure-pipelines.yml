@@ -1,102 +1,97 @@
 trigger:
-  '*'
+- '*'
 
 variables:
   buildConfiguration: 'Release'
   releaseBranchName: 'release'
 
 stages:
-  stage: 'Build'
-  displayName: 'Build the Web Api'
-  jobs:
-    job: 'Build'
-    displayName: 'Build job'
-    pool:
-      vmImage: 'windows-latest'
+  - stage: 'Build'
+    displayName: 'Build the Web Api'
+    jobs:
+      - job: 'Build'
+        displayName: 'Build job'
+        pool:
+          vmImage: 'windows-latest'
 
-    variables:
-      wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
-      dotnetSdkVersion: '8.x'
+        variables:
+          wwwrootDir: 'FiapFase1.UI/wwwroot'
+          dotnetSdkVersion: '8.x'
 
-    steps:
-    - task: UseDotNet@2
-      displayName: 'Use .NET SDK $(dotnetSdkVersion)'
-      inputs:
-        version: '$(dotnetSdkVersion)'
+        steps:
+          - task: UseDotNet@2
+            displayName: 'Use .NET SDK $(dotnetSdkVersion)'
+            inputs:
+              version: '$(dotnetSdkVersion)'
 
-    - task: Npm@1
-      displayName: 'Run npm install'
-      inputs:
-        verbose: false
+          - task: Npm@1
+            displayName: 'Run npm install'
+            inputs:
+              verbose: false
 
-    - script: './node_modules/.bin/node-sass $(wwwrootDir) --output $(wwwrootDir)'
-      displayName: 'Compile Sass assets'
-    
-    - script: 'echo "$(Build.DefinitionName), $(build.BuildNumber)" > buildinfo.txt'
-      displayName: 'write build info'
-      workingDirectory: '$(wwwrootDir)'
+          - powershell: |
+              $(Get-Command node-sass).Path $(wwwrootDir) --output $(wwwrootDir)
+            displayName: 'Compile Sass assets using PowerShell'
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Restore project dependencies'
-      inputs: 
-        command: 'restore'
-        projects: '**/*.csproj'
+          - script: 'echo "$(Build.DefinitionName), $(build.BuildNumber)" > buildinfo.txt'
+            displayName: 'Write build info'
+            workingDirectory: '$(wwwrootDir)'
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Build the project - $(buildConfiguration)'
-      inputs: 
-        command: 'build'
-        arguments: '--no-restore --configuration $(buildConfiguration)'
-        projects: '**/*.csproj'
+          - task: DotNetCoreCLI@2
+            displayName: 'Restore project dependencies'
+            inputs: 
+              command: 'restore'
+              projects: '**/*.csproj'
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Publish the project - $(buildConfiguration)'
-      inputs: 
-        command: 'publish'
-        projects: '**/*.csproj'
-        publishWebProjects: false
-        arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
-        zipAfterPublish: true
-        
-    - publish: '$(Build.ArtifactStagingDirectory)'
-      artifact: drop
+          - task: DotNetCoreCLI@2
+            displayName: 'Build the project - $(buildConfiguration)'
+            inputs: 
+              command: 'build'
+              arguments: '--no-restore --configuration $(buildConfiguration)'
+              projects: '**/*.csproj'
 
-- stage: 'Development'
-  displayName: 'Deploy to the Development'
-  dependsOn: Build
-  condition: succeeded()
-  jobs:
-    - deployment: Deploy
-      pool: self-hosted
-      variables:
-        - group: ''
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-              - download: current
-                artifact: drop
-              - script: |
-                . scho O deploy em development foi realizado com sucesso.
-                displayName: 'deploy to the Development'
+          - task: DotNetCoreCLI@2
+            displayName: 'Publish the project - $(buildConfiguration)'
+            inputs: 
+              command: 'publish'
+              projects: '**/*.csproj'
+              publishWebProjects: false
+              arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
+              zipAfterPublish: true
+          
+          - publish: '$(Build.ArtifactStagingDirectory)'
+            artifact: drop
 
-- stage: 'Staging'
-  displayName: 'Deploy to the Staging'
-  dependsOn: Development
-  condition: succeeded()
-  jobs:
-    - deployment: Deploy
-      pool: self-hosted
-      variables:
-        - group: ''
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-              - download: current
-                artifact: drop
-              - script: |
-                . scho O deploy em Staging foi realizado com sucesso.
-                displayName: 'deploy to the Staging'
+  - stage: 'Development'
+    displayName: 'Deploy to the Development'
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - deployment: Deploy
+        pool: self-hosted
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: current
+                  artifact: drop
+                - powershell: |
+                    echo "O deploy em Development foi realizado com sucesso."
+                  displayName: 'Deploy to Development'
 
-
+  - stage: 'Staging'
+    displayName: 'Deploy to the Staging'
+    dependsOn: Development
+    condition: succeeded()
+    jobs:
+      - deployment: Deploy
+        pool: self-hosted
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: current
+                  artifact: drop
+                - powershell: |
+                    echo "O deploy em Staging foi realizado com sucesso."
+                  displayName: 'Deploy to Staging'
