@@ -12,8 +12,7 @@ stages:
       - job: 'Build'
         displayName: 'Build job'
         pool:
-          name: 'local'
-          vmImage: 'windows-latest'  # Usando um agente do Azure
+          name: 'local'  # Utilizando agente local
 
         variables:
           wwwrootDir: 'FiapFase1.UI/wwwroot'
@@ -71,8 +70,7 @@ stages:
         displayName: 'Deploy to Development'
         environment: 'development'
         pool:
-          name: 'local'
-          vmImage: 'windows-latest'
+          name: 'local'  # Utilizando agente local
         strategy:
           runOnce:
             deploy:
@@ -92,8 +90,7 @@ stages:
         displayName: 'Deploy to Staging'
         environment: 'staging'
         pool:
-          name: 'local'
-          vmImage: 'windows-latest'
+          name: 'local'  # Utilizando agente local
         strategy:
           runOnce:
             deploy:
