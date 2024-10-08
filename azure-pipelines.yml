@@ -12,55 +12,54 @@ stages:
       - job: 'Build'
         displayName: 'Build job'
         pool:
-          vmImage: 'windows-latest'
+          vmImage: 'windows-latest'  # Usando um agente do Azure
 
         variables:
           wwwrootDir: 'FiapFase1.UI/wwwroot'
           dotnetSdkVersion: '8.x'
 
         steps:
-          - task: UseDotNet@2
-            displayName: 'Use .NET SDK $(dotnetSdkVersion)'
-            inputs:
-              version: '$(dotnetSdkVersion)'
+        - task: UseDotNet@2
+          displayName: 'Use .NET SDK $(dotnetSdkVersion)'
+          inputs:
+            version: '$(dotnetSdkVersion)'
 
-          - task: Npm@1
-            displayName: 'Run npm install'
-            inputs:
-              verbose: false
+        - task: Npm@1
+          displayName: 'Run npm install'
+          inputs:
+            verbose: false
 
-          - powershell: |
-              $(Get-Command node-sass).Path $(wwwrootDir) --output $(wwwrootDir)
-            displayName: 'Compile Sass assets using PowerShell'
+        - script: './node_modules/.bin/node-sass $(wwwrootDir) --output $(wwwrootDir)'
+          displayName: 'Compile Sass assets'
+        
+        - script: 'echo "$(Build.DefinitionName), $(build.BuildNumber)" > buildinfo.txt'
+          displayName: 'write build info'
+          workingDirectory: '$(wwwrootDir)'
 
-          - script: 'echo "$(Build.DefinitionName), $(build.BuildNumber)" > buildinfo.txt'
-            displayName: 'Write build info'
-            workingDirectory: '$(wwwrootDir)'
+        - task: DotNetCoreCLI@2
+          displayName: 'Restore project dependencies'
+          inputs: 
+            command: 'restore'
+            projects: '**/*.csproj'
 
-          - task: DotNetCoreCLI@2
-            displayName: 'Restore project dependencies'
-            inputs: 
-              command: 'restore'
-              projects: '**/*.csproj'
+        - task: DotNetCoreCLI@2
+          displayName: 'Build the project - $(buildConfiguration)'
+          inputs: 
+            command: 'build'
+            arguments: '--no-restore --configuration $(buildConfiguration)'
+            projects: '**/*.csproj'
 
-          - task: DotNetCoreCLI@2
-            displayName: 'Build the project - $(buildConfiguration)'
-            inputs: 
-              command: 'build'
-              arguments: '--no-restore --configuration $(buildConfiguration)'
-              projects: '**/*.csproj'
-
-          - task: DotNetCoreCLI@2
-            displayName: 'Publish the project - $(buildConfiguration)'
-            inputs: 
-              command: 'publish'
-              projects: '**/*.csproj'
-              publishWebProjects: false
-              arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
-              zipAfterPublish: true
-          
-          - publish: '$(Build.ArtifactStagingDirectory)'
-            artifact: drop
+        - task: DotNetCoreCLI@2
+          displayName: 'Publish the project - $(buildConfiguration)'
+          inputs: 
+            command: 'publish'
+            projects: '**/*.csproj'
+            publishWebProjects: false
+            arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
+            zipAfterPublish: true
+            
+        - publish: '$(Build.ArtifactStagingDirectory)'
+          artifact: drop
 
   - stage: 'Development'
     displayName: 'Deploy to the Development'
@@ -68,7 +67,10 @@ stages:
     condition: succeeded()
     jobs:
       - deployment: Deploy
-        pool: self-hosted
+        displayName: 'Deploy to Development'
+        environment: 'development'  # Nome do ambiente
+        pool:
+          vmImage: 'windows-latest'  # Usando um agente do Azure
         strategy:
           runOnce:
             deploy:
@@ -85,7 +87,10 @@ stages:
     condition: succeeded()
     jobs:
       - deployment: Deploy
-        pool: self-hosted
+        displayName: 'Deploy to Staging'
+        environment: 'staging'  # Nome do ambiente
+        pool:
+          vmImage: 'windows-latest'  # Usando um agente do Azure
         strategy:
           runOnce:
             deploy:
