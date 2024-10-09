@@ -29,9 +29,12 @@ stages:
           inputs:
             verbose: false
 
-        - script: './node_modules/.bin/sass $(wwwrootDir) --output $(wwwrootDir)'
+        - script: './node_modules/.bin/sass $(wwwrootDir)/styles.scss $(wwwrootDir)/styles.css'
           displayName: 'Compile Sass assets'
-        
+
+        - script: 'dir $(wwwrootDir)'
+          displayName: 'List files in wwwroot after compiling Sass'
+
         - script: 'echo "$(Build.DefinitionName), $(build.BuildNumber)" > buildinfo.txt'
           displayName: 'write build info'
           workingDirectory: '$(wwwrootDir)'
@@ -55,10 +58,11 @@ stages:
             command: 'publish'
             projects: '**/*.csproj'
             publishWebProjects: false
-            arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
+            arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration) --include "$(wwwrootDir)/**/*"'
             zipAfterPublish: true
-            
+                        
         - publish: '$(Build.ArtifactStagingDirectory)'
+          displayName: 'List published artifacts'
           artifact: drop
 
   - stage: 'Development'
