@@ -15,7 +15,7 @@ stages:
           name: 'Default'  # Usando a pool de agentes que você criou
 
         variables:
-          wwwrootDir: 'FiapFase1.UI/wwwroot'
+          wwwrootDir: 'FiapFase1.Interface/wwwroot'
           dotnetSdkVersion: '8.x'
 
         steps:
