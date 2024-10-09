@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiapFase1.Data", "FiapFase1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiapFase1.Tests", "FiapFase1.Tests\FiapFase1.Tests.csproj", "{FD340CC2-DA23-49D7-A31D-F0571656B283}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiapFase1.UI", "FiapFase1.Interface\FiapFase1.UI.csproj", "{4168943C-EAD4-4849-9A8D-41B6A234956E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiapFase1.Interface", "FiapFase1.Interface\FiapFase1.Interface.csproj", "{4168943C-EAD4-4849-9A8D-41B6A234956E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
