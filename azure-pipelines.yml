@@ -12,10 +12,10 @@ stages:
       - job: 'Build'
         displayName: 'Build job'
         pool:
-          name: 'Default'  # Usando a pool de agentes que você criou
+          name: 'Default'
 
         variables:
-          wwwrootDir: 'FiapFase1.Interface/wwwroot'
+          wwwrootDir: 'FiapFase1.UI/wwwroot'
           dotnetSdkVersion: '8.x'
 
         steps:
@@ -29,12 +29,9 @@ stages:
           inputs:
             verbose: false
 
-        - script: './node_modules/.bin/sass $(wwwrootDir)/styles.scss $(wwwrootDir)/styles.css'
+        - script: './node_modules/.bin/node-sass $(wwwrootDir) --output $(wwwrootDir)'
           displayName: 'Compile Sass assets'
-
-        - script: 'dir $(wwwrootDir)'
-          displayName: 'List files in wwwroot after compiling Sass'
-
+        
         - script: 'echo "$(Build.DefinitionName), $(build.BuildNumber)" > buildinfo.txt'
           displayName: 'write build info'
           workingDirectory: '$(wwwrootDir)'
@@ -58,11 +55,10 @@ stages:
             command: 'publish'
             projects: '**/*.csproj'
             publishWebProjects: false
-            arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration) --include "$(wwwrootDir)/**/*"'
+            arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
             zipAfterPublish: true
-                        
+            
         - publish: '$(Build.ArtifactStagingDirectory)'
-          displayName: 'List published artifacts'
           artifact: drop
 
   - stage: 'Development'
@@ -74,7 +70,7 @@ stages:
         displayName: 'Deploy to Development'
         environment: 'development'
         pool:
-          name: 'Default'  # Usando a pool de agentes que você criou
+          name: 'Default'
         strategy:
           runOnce:
             deploy:
@@ -94,7 +90,7 @@ stages:
         displayName: 'Deploy to Staging'
         environment: 'staging'
         pool:
-          name: 'Default'  # Usando a pool de agentes que você criou
+          name: 'Default'
         strategy:
           runOnce:
             deploy:
