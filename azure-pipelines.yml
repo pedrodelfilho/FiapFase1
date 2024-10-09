@@ -46,6 +46,11 @@ stages:
             arguments: '--no-restore --configuration $(buildConfiguration)'
             projects: '**/*.csproj'
 
+        - task: VSTest@2
+          inputs:
+            platform: '$(buildPlataform)'
+            configuration: '$(buildConfiguration)'
+            
         - task: DotNetCoreCLI@2
           displayName: 'Publish the project - $(buildConfiguration)'
           inputs: 
