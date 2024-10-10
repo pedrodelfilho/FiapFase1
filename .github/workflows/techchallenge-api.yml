@@ -60,5 +60,3 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'techchallenge-api'
-          slot-name: 'Production'
-          package: '${{ github.workspace }}/FiapFase1.Api/FiapFase1.Api.csproj'
