@@ -44,5 +44,5 @@ steps:
   inputs:
     azureSubscription: 'Assinatura do Azure 1 (db5db7fd-149c-4ccb-9268-d9e4c37ab9c0)'
     appType: 'webApp'
-    appName: 'techchallenge-web'
+    WebAppName: 'techchallenge-web'
     package: '$(Build.ArtifactStagingDirectory)\WebApp.zip'
