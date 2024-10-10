@@ -1,0 +1,67 @@
+name: Build and deploy ASP.Net Core API to Azure Web App - techchallenge-api
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+
+      - name: Build API with dotnet
+        run: dotnet build ${{ github.workspace }}/FiapFase1.Api/FiapFase1.Api.csproj --configuration Release
+
+      - name: dotnet publish
+        run: dotnet publish ${{ github.workspace }}/FiapFase1.Api/FiapFase1.Api.csproj -c Release -o ${{ github.workspace }}/myapp
+
+      - name: Run Unit Tests
+        run: dotnet test ${{ github.workspace }}/FiapFase1.Tests/FiapFase1.Tests.csproj --configuration Release --no-restore --verbosity normal
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: .net-api-app
+          path: ${{ github.workspace }}/myapp
+
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write # Isso é necessário para solicitar o JWT
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-api-app
+          
+      - name: List files in output directory
+        run: dir ${{ github.workspace }}/myapp
+
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A96BEBA3245C475DA6A93B013A432322 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_915E34B79C064C94B4A3392D41CAB592 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0249C27C44F8401BB737B6004FDC8DF8 }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'techchallenge-api'  # Altere para o nome do aplicativo da API
+          slot-name: 'Production'
+          package: ${{ github.workspace }}/myapp
