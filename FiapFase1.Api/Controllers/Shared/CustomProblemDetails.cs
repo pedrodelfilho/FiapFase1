@@ -3,6 +3,9 @@ using System.Net;
 
 namespace FiapFase1.Api.Controllers.Shared
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CustomProblemDetails : ProblemDetails
     {
         /// <summary>

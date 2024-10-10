@@ -19,7 +19,7 @@ namespace FiapFase1.Interface.Pages.Contatos
         }
 
         [BindProperty]
-        public AtualizarContatoRequest atualizarContatoRequest { get; set; } = default;
+        public AtualizarContatoRequest AtualizarContatoRequest { get; set; } = default;
         public List<DDD> DDDList { get; set; } = [];
         public List<SelectListItem> DDDs { get; set; } = [];
 
@@ -31,7 +31,7 @@ namespace FiapFase1.Interface.Pages.Contatos
                 return NotFound();
             }
 
-            await LoadContato(contato);
+            LoadContato(contato);
             await LoadDDDs();
             return Page();
         }
@@ -48,11 +48,11 @@ namespace FiapFase1.Interface.Pages.Contatos
 
                 await _contatoService.AtualizarContato(new AtualizarContatoRequest
                 {
-                    Id = atualizarContatoRequest.Id,
-                    Nome = atualizarContatoRequest.Nome,
-                    NrTelefone = atualizarContatoRequest.NrTelefone,
-                    Email = atualizarContatoRequest.Email,
-                    NrDDD = atualizarContatoRequest.NrDDD
+                    Id = AtualizarContatoRequest.Id,
+                    Nome = AtualizarContatoRequest.Nome,
+                    NrTelefone = AtualizarContatoRequest.NrTelefone,
+                    Email = AtualizarContatoRequest.Email,
+                    NrDDD = AtualizarContatoRequest.NrDDD
                 });
 
                 TempData["AlertSuccess"] = "Contato atualizado com sucesso!";
@@ -71,7 +71,7 @@ namespace FiapFase1.Interface.Pages.Contatos
 
             DDDs.Add(new SelectListItem { Value = "", Text = "" });
 
-            if (DDDList != null && DDDList.Any())
+            if (DDDList.Count > 0)
             {
                 DDDs.AddRange(DDDList.Select(d => new SelectListItem
                 {
@@ -83,9 +83,9 @@ namespace FiapFase1.Interface.Pages.Contatos
             ViewData["NrDDD"] = DDDs;
         }
 
-        private async Task LoadContato(Contato contato)
+        private void LoadContato(Contato contato)
         {
-            atualizarContatoRequest = new AtualizarContatoRequest
+            AtualizarContatoRequest = new AtualizarContatoRequest
             {
                 Email = contato.Email,
                 Id = contato.Id,

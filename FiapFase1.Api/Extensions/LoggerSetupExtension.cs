@@ -2,6 +2,9 @@
 
 namespace FiapFase1.Api.Extensions
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class LoggerSetupExtension
     {
         /// <summary>

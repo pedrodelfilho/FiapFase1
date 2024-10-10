@@ -10,8 +10,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FiapFase1.Api.Options.IoC
 {
-    public static class DependencyInjection
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class DependencyInjection       
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
             // Connection strings

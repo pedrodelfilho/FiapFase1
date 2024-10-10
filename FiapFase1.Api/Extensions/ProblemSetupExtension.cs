@@ -5,6 +5,9 @@ using ProblemDetailsOptions = Hellang.Middleware.ProblemDetails.ProblemDetailsOp
 
 namespace FiapFase1.Api.Extensions
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ProblemSetupExtension
     {
         /// <summary>

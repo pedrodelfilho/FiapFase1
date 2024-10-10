@@ -7,10 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FiapFase1.Api.Controllers.v1
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DDDController : ApiControllerBase
     {
         private readonly IDDDService _idDDService;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idDDService"></param>
         public DDDController(IDDDService idDDService)
         {
             _idDDService = idDDService;
