@@ -17,10 +17,7 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
-
-      - name: Restore NuGet packages
-        run: dotnet restore ${{ github.workspace }}/FiapFase1/FiapFase1.Tests/FiapFase1.Tests.csproj
-
+          
       - name: Build API with dotnet
         run: dotnet build ${{ github.workspace }}/FiapFase1.Api/FiapFase1.Api.csproj --configuration Release
 
@@ -28,7 +25,7 @@ jobs:
         run: dotnet publish ${{ github.workspace }}/FiapFase1.Api/FiapFase1.Api.csproj -c Release -o ${{ github.workspace }}/myapp
 
       - name: Run Unit Tests
-        run: dotnet test ${{ github.workspace }}/FiapFase1.Tests/FiapFase1.Tests.csproj --configuration Release --no-restore --verbosity normal
+        run: dotnet test ${{ github.workspace }}/FiapFase1.Tests/FiapFase1.Tests.csproj --configuration Debug
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
