@@ -10,6 +10,7 @@
 	  <DocumentationFile>FiapFase1.Api.xml</DocumentationFile>
 	  <OutputPath></OutputPath>
   </PropertyGroup>
+	
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
