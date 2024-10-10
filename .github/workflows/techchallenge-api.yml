@@ -37,10 +37,10 @@ jobs:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write # Isso é necessário para solicitar o JWT
+      id-token: write
 
     steps:
       - name: Download artifact from build job
@@ -62,6 +62,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'techchallenge-api'  # Altere para o nome do aplicativo da API
-          slot-name: 'Production'
+          app-name: 'techchallenge-api'
+          slot-name: 'Development'
           package: ${{ github.workspace }}/myapp
