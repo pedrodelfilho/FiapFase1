@@ -41,10 +41,10 @@ steps:
     ArtifactName: 'ArtefatoAPI'
 
 # Publicando no Azure App Service (projeto da API)
-- task: AzureWebApp@1
+- task: AzureRmWebAppDeployment@4
   displayName: 'Publicar API no Azure App Service'
   inputs:
     azureSubscription: 'Assinatura do Azure 1 (db5db7fd-149c-4ccb-9268-d9e4c37ab9c0)'
     appType: 'webApp'
-    appName: 'FiapFase1.Api'
+    WebAppName: 'techchallenge-api'
     package: '$(Build.ArtifactStagingDirectory)\ApiApp.zip'
