@@ -39,7 +39,7 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)\WebApp.zip'
     ArtifactName: 'ArtefatoWeb'
 
-- task: AzureWebApp@1
+- task: AzureRmWebAppDeployment@4
   displayName: 'Publicar Web no Azure App Service'
   inputs:
     azureSubscription: 'Assinatura do Azure 1 (db5db7fd-149c-4ccb-9268-d9e4c37ab9c0)'
