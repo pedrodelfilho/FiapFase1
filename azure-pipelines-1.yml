@@ -1,8 +1,3 @@
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
 - '*'
 
@@ -10,34 +5,44 @@ pool:
   name: 'Default'
 
 variables:
-  solution: '**/*.sln'
+  solution: '**/FiapFase1.sln'
+  webProject: 'FiapFase1.Interface/FiapFase1.Interface.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
 steps:
 - task: NuGetToolInstaller@1
-  displayName: 'Preparando pacotes nuget'
+  displayName: 'Preparando pacotes NuGet'
 
 - task: NuGetCommand@2
-  displayName: 'Instalando pacores nuget'
+  displayName: 'Restaurando pacotes NuGet'
   inputs:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
-  displayName: 'Build Deployment'
+  displayName: 'Build Web Project'
   inputs:
-    solution: '$(solution)'
+    solution: '$(webProject)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
 - task: VSTest@2
-  displayName: 'Build Tests'
+  displayName: 'Executando Testes do Web'
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Build Artifacts'
+  displayName: 'Publicando Artefatos do Web'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\WebApp.zip'
     ArtifactName: 'ArtefatoWeb'
+
+- task: AzureWebApp@1
+  displayName: 'Publicar Web no Azure App Service'
+  inputs:
+    azureSubscription: 'Assinatura do Azure 1 (db5db7fd-149c-4ccb-9268-d9e4c37ab9c0)'
+    appType: 'webApp'
+    appName: 'techchallenge-web'
+    package: '$(Build.ArtifactStagingDirectory)\WebApp.zip'
