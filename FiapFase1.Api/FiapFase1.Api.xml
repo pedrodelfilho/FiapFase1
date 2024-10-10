@@ -9,6 +9,11 @@
             
             </summary>
         </member>
+        <member name="T:FiapFase1.Api.Controllers.Shared.CustomProblemDetails">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:FiapFase1.Api.Controllers.Shared.CustomProblemDetails.Errors">
             <summary>
             
@@ -78,11 +83,27 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="T:FiapFase1.Api.Controllers.v1.DDDController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FiapFase1.Api.Controllers.v1.DDDController.#ctor(FiapFase1.Domain.Interfaces.Services.IDDDService)">
+            <summary>
+            
+            </summary>
+            <param name="idDDService"></param>
+        </member>
         <member name="M:FiapFase1.Api.Controllers.v1.DDDController.ObterTodosDDDs">
             <summary>
             Comando responsável em obter todos DDDs 
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:FiapFase1.Api.Extensions.ApiVersionSetupExtension">
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:FiapFase1.Api.Extensions.ApiVersionSetupExtension.AddVersioning(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
@@ -90,6 +111,11 @@
             </summary>
             <param name="services"></param>
             <returns></returns>
+        </member>
+        <member name="T:FiapFase1.Api.Extensions.AuthSetupExtension">
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:FiapFase1.Api.Extensions.AuthSetupExtension.AddAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
@@ -99,12 +125,22 @@
             <param name="configuration"></param>
             <returns></returns>
         </member>
+        <member name="T:FiapFase1.Api.Extensions.LoggerSetupExtension">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:FiapFase1.Api.Extensions.LoggerSetupExtension.ResolveLog(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             
             </summary>
             <param name="services"></param>
             <returns></returns>
+        </member>
+        <member name="T:FiapFase1.Api.Extensions.ProblemSetupExtension">
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:FiapFase1.Api.Extensions.ProblemSetupExtension.AddApiProblemDetails(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
@@ -121,6 +157,11 @@
             <param name="options"></param>
             <param name="statusCode"></param>
         </member>
+        <member name="T:FiapFase1.Api.Extensions.SwaggerSetupExtension">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:FiapFase1.Api.Extensions.SwaggerSetupExtension.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             
@@ -134,6 +175,49 @@
             </summary>
             <param name="app"></param>
             <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:FiapFase1.Api.Options.IoC.DependencyInjection">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FiapFase1.Api.Options.IoC.DependencyInjection.RegisterServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <param name="configuration"></param>
+            <returns></returns>
+        </member>
+        <member name="T:FiapFase1.Api.Options.JwtOptions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiapFase1.Api.Options.JwtOptions.Issuer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiapFase1.Api.Options.JwtOptions.Audience">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiapFase1.Api.Options.JwtOptions.SigningCredentials">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiapFase1.Api.Options.JwtOptions.AccessTokenExpiration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:FiapFase1.Api.Options.JwtOptions.RefreshTokenExpiration">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:FiapFase1.Api.Resources.ApiConstants">
             <summary>
