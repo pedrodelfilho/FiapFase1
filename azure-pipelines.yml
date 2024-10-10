@@ -1,104 +1,50 @@
 trigger:
 - '*'
 
+pool:
+  name: 'Default'
+
 variables:
+  solution: '**/FiapFase1.sln'
+  apiProject: 'FiapFase1.Api/FiapFase1.Api.csproj'
+  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  releaseBranchName: 'release'
 
-stages:
-  - stage: 'Build'
-    displayName: 'Build the Web Api'
-    jobs:
-      - job: 'Build'
-        displayName: 'Build job'
-        pool:
-          name: 'Default'
+steps:
+- task: NuGetToolInstaller@1
+  displayName: 'Preparando pacotes NuGet'
 
-        variables:
-          wwwrootDir: 'FiapFase1.Interface/wwwroot'
-          dotnetSdkVersion: '8.x'
+- task: NuGetCommand@2
+  displayName: 'Restaurando pacotes NuGet'
+  inputs:
+    restoreSolution: '$(solution)'
 
-        steps:
-        - task: UseDotNet@2
-          displayName: 'Use .NET SDK $(dotnetSdkVersion)'
-          inputs:
-            version: '$(dotnetSdkVersion)'
+# Build do projeto API
+- task: VSBuild@1
+  displayName: 'Build API Project'
+  inputs:
+    solution: '$(apiProject)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\ApiApp.zip" /p:DeployIisAppPath="Default Web Site"'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
 
-        - task: Npm@1
-          displayName: 'Run npm install'
-          inputs:
-            verbose: false
-        
-        - script: 'echo "$(Build.DefinitionName), $(build.BuildNumber)" > buildinfo.txt'
-          displayName: 'write build info'
-          workingDirectory: '$(wwwrootDir)'
+- task: VSTest@2
+  displayName: 'Executando Testes da API'
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
 
-        - task: DotNetCoreCLI@2
-          displayName: 'Restore project dependencies'
-          inputs: 
-            command: 'restore'
-            projects: '**/*.csproj'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publicando Artefatos da API'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)\ApiApp.zip'
+    ArtifactName: 'ArtefatoAPI'
 
-        - task: DotNetCoreCLI@2
-          displayName: 'Build the project - $(buildConfiguration)'
-          inputs: 
-            command: 'build'
-            arguments: '--no-restore --configuration $(buildConfiguration)'
-            projects: '**/*.csproj'
-
-        - task: VSTest@2
-          inputs:
-            platform: '$(buildPlataform)'
-            configuration: '$(buildConfiguration)'
-            
-        - task: DotNetCoreCLI@2
-          displayName: 'Publish the project - $(buildConfiguration)'
-          inputs: 
-            command: 'publish'
-            projects: '**/*.csproj'
-            publishWebProjects: false
-            arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
-            zipAfterPublish: true
-            
-        - publish: '$(Build.ArtifactStagingDirectory)'
-          artifact: drop
-
-  - stage: 'Development'
-    displayName: 'Deploy to the Development'
-    dependsOn: Build
-    condition: succeeded()
-    jobs:
-      - deployment: Deploy
-        displayName: 'Deploy to Development'
-        environment: 'development'
-        pool:
-          name: 'Default'
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - download: current
-                  artifact: drop
-                - powershell: |
-                    echo "O deploy em Development foi realizado com sucesso."
-                  displayName: 'Deploy to Development'
-
-  - stage: 'Staging'
-    displayName: 'Deploy to the Staging'
-    dependsOn: Development
-    condition: succeeded()
-    jobs:
-      - deployment: Deploy
-        displayName: 'Deploy to Staging'
-        environment: 'staging'
-        pool:
-          name: 'Default'
-        strategy:
-          runOnce:
-            deploy:
-              steps:
-                - download: current
-                  artifact: drop
-                - powershell: |
-                    echo "O deploy em Staging foi realizado com sucesso."
-                  displayName: 'Deploy to Staging'
+# Publicando no Azure App Service (projeto da API)
+- task: AzureWebApp@1
+  displayName: 'Publicar API no Azure App Service'
+  inputs:
+    azureSubscription: 'Assinatura do Azure 1 (db5db7fd-149c-4ccb-9268-d9e4c37ab9c0)'
+    appType: 'webApp'
+    appName: 'FiapFase1.Api'
+    package: '$(Build.ArtifactStagingDirectory)\ApiApp.zip'
