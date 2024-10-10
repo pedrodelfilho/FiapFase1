@@ -19,7 +19,6 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-# Build do projeto API
 - task: VSBuild@1
   displayName: 'Build API Project'
   inputs:
@@ -31,6 +30,7 @@ steps:
 - task: VSTest@2
   displayName: 'Executando Testes da API'
   inputs:
+    testAssemblyVer2: '$(Build.SourcesDirectory)/**/bin/$(buildConfiguration)/**/FiapFase1.Tests.dll'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
