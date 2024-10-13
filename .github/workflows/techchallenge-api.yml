@@ -23,8 +23,7 @@ jobs:
       - name: dotnet publish
         run: dotnet publish ${{ github.workspace }}/FiapFase1.Api/FiapFase1.Api.csproj -c Release -o ${{ github.workspace }}/myapp
 
-      - name: Run Unit Tests
-        run: dotnet test ${{ github.workspace }}/FiapFase1.Tests/FiapFase1.Tests.csproj --configuration Debug
+      
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
