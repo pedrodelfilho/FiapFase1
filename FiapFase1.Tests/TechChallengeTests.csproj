@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -25,9 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FiapFase1.Data\FiapFase1.Data.csproj" />
-    <ProjectReference Include="..\FiapFase1.Domain\FiapFase1.Domain.csproj" />
-    <ProjectReference Include="..\FiapFase1.Manager\FiapFase1.Manager.csproj" />
+    <ProjectReference Include="..\FiapFase1.Data\TechChallenge.Data.csproj" />
+    <ProjectReference Include="..\FiapFase1.Domain\TechChallenge.Domain.csproj" />
+    <ProjectReference Include="..\FiapFase1.Manager\TechChallenge.Manager.csproj" />
   </ItemGroup>
 
   <ItemGroup>

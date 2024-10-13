@@ -1,6 +1,6 @@
-﻿using FiapFase1.Domain.Entities.Responses;
+﻿using TechChallenge.Domain.Entities.Responses;
 
-namespace FiapFase1.Domain.Exceptions
+namespace TechChallenge.Domain.Exceptions
 {
     public static class ResponseException
     {

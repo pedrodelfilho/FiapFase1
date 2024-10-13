@@ -1,12 +1,12 @@
-﻿using FiapFase1.Domain.Entities.Models;
-using FiapFase1.Domain.Exceptions;
-using FiapFase1.Domain.Interfaces.Repositories;
-using FiapFase1.Domain.Interfaces.Services;
-using FiapFase1.Manager.Services;
+﻿using TechChallenge.Domain.Entities.Models;
+using TechChallenge.Domain.Exceptions;
+using TechChallenge.Domain.Interfaces.Repositories;
+using TechChallenge.Domain.Interfaces.Services;
+using TechChallenge.Manager.Services;
 using Microsoft.Extensions.Logging;
 using Moq;
 
-namespace FiapFase1.Tests.Manager;
+namespace TechChallenge.Tests.Manager;
 public class ContatoServiceTest
 {
     private readonly Mock<IContatoRepository> _contatoRepositoryMock;

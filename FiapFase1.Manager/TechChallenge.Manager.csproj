@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FiapFase1.Domain\FiapFase1.Domain.csproj" />
+    <ProjectReference Include="..\FiapFase1.Domain\TechChallenge.Domain.csproj" />
   </ItemGroup>
 
 </Project>

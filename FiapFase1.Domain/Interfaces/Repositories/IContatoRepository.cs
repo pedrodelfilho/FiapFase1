@@ -1,6 +1,6 @@
-﻿using FiapFase1.Domain.Entities.Models;
+﻿using TechChallenge.Domain.Entities.Models;
 
-namespace FiapFase1.Domain.Interfaces.Repositories
+namespace TechChallenge.Domain.Interfaces.Repositories
 {
     public interface IContatoRepository : IBaseRepository<Contato>
     {

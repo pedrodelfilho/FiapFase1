@@ -1,4 +1,4 @@
-﻿namespace FiapFase1.Api.Resources
+﻿namespace TechChallenge.Api.Resources
 {
     /// <summary>
     /// 

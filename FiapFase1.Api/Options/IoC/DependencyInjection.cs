@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
-using FiapFase1.Data.Context;
-using FiapFase1.Data.Repositories;
-using FiapFase1.Domain.Entities.Models;
-using FiapFase1.Domain.Entities.Requests;
-using FiapFase1.Domain.Interfaces.Repositories;
-using FiapFase1.Domain.Interfaces.Services;
-using FiapFase1.Manager.Services;
+using TechChallenge.Data.Context;
+using TechChallenge.Data.Repositories;
+using TechChallenge.Domain.Entities.Models;
+using TechChallenge.Domain.Entities.Requests;
+using TechChallenge.Domain.Interfaces.Repositories;
+using TechChallenge.Domain.Interfaces.Services;
+using TechChallenge.Manager.Services;
 using Microsoft.EntityFrameworkCore;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
 
-namespace FiapFase1.Api.Options.IoC
+namespace TechChallenge.Api.Options.IoC
 {
     /// <summary>
     /// 

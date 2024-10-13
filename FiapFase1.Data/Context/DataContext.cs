@@ -1,8 +1,8 @@
-﻿using FiapFase1.Data.Mappings;
-using FiapFase1.Domain.Entities.Models;
+﻿using TechChallenge.Data.Mappings;
+using TechChallenge.Domain.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FiapFase1.Data.Context
+namespace TechChallenge.Data.Context
 {
     public class DataContext : DbContext
     {

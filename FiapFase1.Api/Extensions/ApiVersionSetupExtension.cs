@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace FiapFase1.Api.Extensions
+namespace TechChallenge.Api.Extensions
 {
     /// <summary>
     /// 

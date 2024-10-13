@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FiapFase1.Domain.Validation
+namespace TechChallenge.Domain.Validation
 {
     public class NomeAttribute : ValidationAttribute
     {

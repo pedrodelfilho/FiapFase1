@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "FiapFase1.Api": {
+    "TechChallenge.Api": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

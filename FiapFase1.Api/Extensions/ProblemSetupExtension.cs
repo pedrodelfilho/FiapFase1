@@ -3,7 +3,7 @@ using Hellang.Middleware.ProblemDetails.Mvc;
 using ProblemDetailsOptions = Hellang.Middleware.ProblemDetails.ProblemDetailsOptions;
 
 
-namespace FiapFase1.Api.Extensions
+namespace TechChallenge.Api.Extensions
 {
     /// <summary>
     /// 

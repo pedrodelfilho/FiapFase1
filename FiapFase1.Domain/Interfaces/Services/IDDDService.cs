@@ -1,6 +1,6 @@
-﻿using FiapFase1.Domain.Entities.Models;
+﻿using TechChallenge.Domain.Entities.Models;
 
-namespace FiapFase1.Domain.Interfaces.Services
+namespace TechChallenge.Domain.Interfaces.Services
 {
     public interface IDDDService
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace FiapFase1.Api.Controllers.Shared;
+namespace TechChallenge.Api.Controllers.Shared;
 
 /// <summary>
 /// 

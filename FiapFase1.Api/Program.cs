@@ -1,6 +1,6 @@
-using FiapFase1.Api.Extensions;
-using FiapFase1.Api.Options.IoC;
-using FiapFase1.Data.Context;
+using TechChallenge.Api.Extensions;
+using TechChallenge.Api.Options.IoC;
+using TechChallenge.Data.Context;
 using Hellang.Middleware.ProblemDetails;
 using Microsoft.EntityFrameworkCore;
 

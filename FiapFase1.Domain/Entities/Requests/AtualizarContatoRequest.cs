@@ -1,7 +1,7 @@
-﻿using FiapFase1.Domain.Validation;
+﻿using TechChallenge.Domain.Validation;
 using System.ComponentModel.DataAnnotations;
 
-namespace FiapFase1.Domain.Entities.Requests
+namespace TechChallenge.Domain.Entities.Requests
 {
     public class AtualizarContatoRequest
     {

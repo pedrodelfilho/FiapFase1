@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TechChallenge.Domain.Entities;
 
-namespace FiapFase1.Domain.Entities.Models
+namespace TechChallenge.Domain.Entities.Models
 {
     public class DDD : BaseModel
     {

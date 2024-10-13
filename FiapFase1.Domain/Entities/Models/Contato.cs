@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using TechChallenge.Domain.Entities;
 
-namespace FiapFase1.Domain.Entities.Models
+namespace TechChallenge.Domain.Entities.Models
 {
     public class Contato : BaseModel
     {

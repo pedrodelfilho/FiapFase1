@@ -1,4 +1,4 @@
-﻿namespace FiapFase1.Domain.Exceptions
+﻿namespace TechChallenge.Domain.Exceptions
 {
     public class DomainException : Exception
     {

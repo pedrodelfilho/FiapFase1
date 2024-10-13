@@ -1,6 +1,6 @@
 ﻿using TechChallenge.Domain.Entities;
 
-namespace FiapFase1.Domain.Interfaces.Repositories
+namespace TechChallenge.Domain.Interfaces.Repositories
 {
     public interface IBaseRepository<T> where T : BaseModel
     {

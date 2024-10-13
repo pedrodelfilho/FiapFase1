@@ -1,9 +1,9 @@
-﻿using FiapFase1.Data.Context;
-using FiapFase1.Data.Repositories;
-using FiapFase1.Domain.Entities.Models;
+﻿using TechChallenge.Data.Context;
+using TechChallenge.Data.Repositories;
+using TechChallenge.Domain.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FiapFase1.Tests.Data;
+namespace TechChallenge.Tests.Data;
 
 public class ContatoRepositoryTest
 {

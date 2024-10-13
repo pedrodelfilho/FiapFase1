@@ -1,10 +1,10 @@
-﻿using FiapFase1.Api.Options;
+﻿using TechChallenge.Api.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace FiapFase1.Api.Extensions
+namespace TechChallenge.Api.Extensions
 {
     /// <summary>
     /// 

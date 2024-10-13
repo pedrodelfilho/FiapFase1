@@ -1,8 +1,8 @@
-﻿using FiapFase1.Data.Context;
-using FiapFase1.Domain.Entities.Models;
-using FiapFase1.Domain.Interfaces.Repositories;
+﻿using TechChallenge.Data.Context;
+using TechChallenge.Domain.Entities.Models;
+using TechChallenge.Domain.Interfaces.Repositories;
 
-namespace FiapFase1.Data.Repositories
+namespace TechChallenge.Data.Repositories
 {
     public class DDDRepository : BaseRepository<DDD>, IDDDRepository
     {

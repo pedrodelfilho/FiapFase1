@@ -1,9 +1,9 @@
-﻿using FiapFase1.Domain.Entities.Models;
-using FiapFase1.Domain.Exceptions;
-using FiapFase1.Domain.Interfaces.Repositories;
-using FiapFase1.Domain.Interfaces.Services;
+﻿using TechChallenge.Domain.Entities.Models;
+using TechChallenge.Domain.Exceptions;
+using TechChallenge.Domain.Interfaces.Repositories;
+using TechChallenge.Domain.Interfaces.Services;
 
-namespace FiapFase1.Manager.Services
+namespace TechChallenge.Manager.Services
 {
     public class ContatoService : IContatoService
     {

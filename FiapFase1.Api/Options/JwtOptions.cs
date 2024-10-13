@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 
-namespace FiapFase1.Api.Options;
+namespace TechChallenge.Api.Options;
 
 /// <summary>
 /// 

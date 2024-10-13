@@ -1,6 +1,6 @@
 ﻿using NLog.Extensions.Logging;
 
-namespace FiapFase1.Api.Extensions
+namespace TechChallenge.Api.Extensions
 {
     /// <summary>
     /// 

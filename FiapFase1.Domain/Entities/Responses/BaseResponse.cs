@@ -1,4 +1,4 @@
-﻿namespace FiapFase1.Domain.Entities.Responses
+﻿namespace TechChallenge.Domain.Entities.Responses
 {
     public class BaseResponse
     {

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace FiapFase1.Data.Migrations
+namespace TechChallenge.Data.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using FiapFase1.Api.Controllers.Shared;
-using FiapFase1.Domain.Entities.Responses;
-using FiapFase1.Domain.Exceptions;
-using FiapFase1.Domain.Interfaces.Services;
+using TechChallenge.Api.Controllers.Shared;
+using TechChallenge.Domain.Entities.Responses;
+using TechChallenge.Domain.Exceptions;
+using TechChallenge.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FiapFase1.Api.Controllers.v1
+namespace TechChallenge.Api.Controllers.v1
 {
     /// <summary>
     /// 

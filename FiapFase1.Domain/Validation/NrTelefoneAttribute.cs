@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
-namespace FiapFase1.Domain.Validation
+namespace TechChallenge.Domain.Validation
 {
     public class NrTelefoneAttribute : ValidationAttribute
     {

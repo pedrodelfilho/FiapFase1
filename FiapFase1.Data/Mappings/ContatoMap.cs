@@ -1,8 +1,8 @@
-﻿using FiapFase1.Domain.Entities.Models;
+﻿using TechChallenge.Domain.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FiapFase1.Data.Mappings
+namespace TechChallenge.Data.Mappings
 {
     public class ContatoMap : IEntityTypeConfiguration<Contato>
     {

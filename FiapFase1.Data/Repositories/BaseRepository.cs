@@ -1,9 +1,9 @@
-﻿using FiapFase1.Data.Context;
-using FiapFase1.Domain.Interfaces.Repositories;
+﻿using TechChallenge.Data.Context;
+using TechChallenge.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using TechChallenge.Domain.Entities;
 
-namespace FiapFase1.Data.Repositories
+namespace TechChallenge.Data.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseModel
     {
