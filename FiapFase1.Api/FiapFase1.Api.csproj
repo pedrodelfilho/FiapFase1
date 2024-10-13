@@ -40,5 +40,4 @@
 		<ProjectReference Include="..\FiapFase1.Domain\FiapFase1.Domain.csproj" />
 		<ProjectReference Include="..\FiapFase1.Manager\FiapFase1.Manager.csproj" />
 	</ItemGroup>
-
 </Project>
