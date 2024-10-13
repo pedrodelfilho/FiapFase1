@@ -5,6 +5,8 @@ on:
     branches:
       - master
   workflow_dispatch:
+env:
+    ACTIONS_STEP_DEBUG: true
 
 jobs:
   build:
@@ -60,4 +62,3 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'techchallenge-api'
-          slot-name: 'Production'
