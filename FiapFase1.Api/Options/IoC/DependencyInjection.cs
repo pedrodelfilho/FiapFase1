@@ -7,6 +7,8 @@ using FiapFase1.Domain.Interfaces.Repositories;
 using FiapFase1.Domain.Interfaces.Services;
 using FiapFase1.Manager.Services;
 using Microsoft.EntityFrameworkCore;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Trace;
 
 namespace FiapFase1.Api.Options.IoC
 {
@@ -23,6 +25,16 @@ namespace FiapFase1.Api.Options.IoC
         /// <returns></returns>
         public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
+            // Prometheus
+            services.AddOpenTelemetry()
+            .WithMetrics(metrics =>
+            {
+                metrics
+                    .AddAspNetCoreInstrumentation()
+                    .AddRuntimeInstrumentation()
+                    .AddPrometheusExporter();
+            });
+
             // Connection strings
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("BdPadraoConnection")));

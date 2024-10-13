@@ -22,6 +22,7 @@ builder.Services.RegisterServices(builder.Configuration);
 
 var app = builder.Build();
 
+app.UseOpenTelemetryPrometheusScrapingEndpoint();
 app.UseProblemDetails();
 app.UseSwaggerUI();
 app.UseHttpsRedirection();
