@@ -59,4 +59,4 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'techchallenge-api'
-          resource-group: 'fiap-api'
+          resource-group-name: 'fiap-api'
