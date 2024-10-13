@@ -54,10 +54,10 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_915E34B79C064C94B4A3392D41CAB592 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0249C27C44F8401BB737B6004FDC8DF8 }}
 
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure Web API
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'techchallenge-api'
-          slot-name: 'Production'
           resource-group-name: 'fiap-api'
+          package: '${{ github.workspace }}/myapp'
